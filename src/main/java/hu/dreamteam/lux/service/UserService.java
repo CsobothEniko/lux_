@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements UserDetailsService {
 
-    private User currentUser;
     private UserRepo userRepo;
     private RoleRepo roleRepo;
     private static final String USER_ROLE = "user";
@@ -30,7 +29,6 @@ public class UserService implements UserDetailsService {
         if(user == null){
             throw new UsernameNotFoundException(s);
         }
-        currentUser = user;
         return new MyUserPrincipal(user);
     }
 
@@ -45,10 +43,6 @@ public class UserService implements UserDetailsService {
         }
         user.getRoles().add(userRole);
         User u = userRepo.save(user);
-    }
-
-    public User getCurrentUser(){
-        return currentUser;
     }
 
 }

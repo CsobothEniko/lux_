@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class HomeController {
 
@@ -33,9 +35,9 @@ public class HomeController {
     }
 
     @RequestMapping("/")
-    public String index(Model model){
+    public String index(HttpServletRequest request, Model model){
         model.addAttribute("post", new Post());
-        model.addAttribute("current_user_name", userService.getCurrentUser().getFirstName());
+        model.addAttribute("current_user_name", request.getUserPrincipal().getName());
         try {
             model.addAttribute("posts", postService.getPosts());
         }catch (NullPointerException ex){
@@ -58,10 +60,10 @@ public class HomeController {
     }
 
     @RequestMapping("/post")
-    public String posting(Post post,  Model model){
-        postService.savePost(post, userService.getCurrentUser());
+    public String posting(Post post, HttpServletRequest request,  Model model){
+        postService.savePost(post, userService.findByEmail(request.getUserPrincipal().getName()));
         model.addAttribute("post", new Post());
-        model.addAttribute("current_user_name", userService.getCurrentUser().getFirstName());
+        model.addAttribute("current_user_name", request.getUserPrincipal().getName());
         try {
             model.addAttribute("posts", postService.getPosts());
         }catch (NullPointerException ex){
