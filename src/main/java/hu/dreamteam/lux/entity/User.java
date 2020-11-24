@@ -2,23 +2,40 @@ package hu.dreamteam.lux.entity;
 
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
     private Calendar birthsday;
     private Character sex;
+    @Column(unique = true, nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private String password;
     private String place;
     private String interests;
-    @OneToMany(mappedBy = "user")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles = new HashSet<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Post> posts;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Comment> comments;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Like> likes;
+    @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY)
+    private List<FriendRequest> sender;
+    @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
+    private List<FriendRequest> receiver;
 
     public User(){}
 
@@ -77,4 +94,69 @@ public class User {
     public void setInterests(String interests) {
         this.interests = interests;
     }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<FriendRequest> getSender() {
+        return sender;
+    }
+
+    public void setSender(List<FriendRequest> sender) {
+        this.sender = sender;
+    }
+
+    public List<FriendRequest> getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(List<FriendRequest> receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
 }

@@ -3,14 +3,17 @@ package hu.dreamteam.lux.entity;
 import javax.persistence.*;
 import java.util.Date;
 
-//@Entity
+@Entity
 public class Comment {
 
-  //  @Id
-  //  @GeneratedValue(strategy= GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-  //  @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name="post_id")
     private Post post;
+    @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
     private Date date;
     private String content;
@@ -56,4 +59,5 @@ public class Comment {
     public void setContent(String content) {
         this.content = content;
     }
+
 }

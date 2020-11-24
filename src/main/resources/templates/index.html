@@ -9,6 +9,19 @@
     <div>
         <h1>Lux</h1>
     </div>
+    <form th:action="@{/post}" th:object="${post}" method="post">
+        <textarea th:field="*{content}" id="content" name="content"></textarea>
+        <input type="submit" value="post">
+    </form>
+    <div>
+        <p th:text="${current_user_name}"></p>
+    </div>
+
+    <div th:each="post : ${posts}">
+        <p th:text="${post.user.firstName}"></p>
+        <p th:text="${post.content}"></p>
+    </div>
+
 
 </body>
 </html>

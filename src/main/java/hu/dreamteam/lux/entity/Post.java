@@ -2,12 +2,13 @@ package hu.dreamteam.lux.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Post {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -15,6 +16,10 @@ public class Post {
     private Date date;
     private String content;
     private String picture;
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
+    @OneToMany(mappedBy ="post")
+    private List<Like> likes;
 
     public Post(){}
 
@@ -56,5 +61,21 @@ public class Post {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
     }
 }
