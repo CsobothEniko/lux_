@@ -61,8 +61,7 @@ public class HomeController {
 
     @RequestMapping("/post")
     public String posting(Post post,  Model model){
-        post.setUser(userService.getCurrentUser());
-        postService.savePost(post);
+        postService.savePost(post, userService.getCurrentUser());
         model.addAttribute("post", new Post());
         model.addAttribute("current_user_name", userService.getCurrentUser().getFirstName());
         try {

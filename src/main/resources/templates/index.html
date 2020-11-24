@@ -5,10 +5,11 @@
     <title>lux</title>
     <style>
         .box{
-            backgroung-color:#dee9fa;
+            background-color: #bcc9e3;
             border: 1px solid black;
             border-radius: 5px;
-            box-shadow: 2px 2px;
+            padding: 10px;
+            margin: 5%;
         }
     </style>
 </head>
@@ -26,8 +27,9 @@
     </div>
 
     <div th:each="post : ${posts}" class="box">
-        <p th:text="${post.user.firstName}"></p>
+        <h3 th:text="${post.user.firstName}"></h3>
         <p th:text="${post.content}"></p>
+        <p th:text="${post.date}"></p>
     </div>
 
 
