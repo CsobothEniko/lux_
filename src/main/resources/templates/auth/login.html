@@ -5,7 +5,7 @@
     <title>lux login</title>
 </head>
 <body>
-    <form name="login" th:action="@{/login}" method="post">
+    <form name="login" th:action="@{login}" method="post">
         <div th:if="${param.error}">
             <p>Hibás adatok</p>
         </div>
