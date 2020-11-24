@@ -5,8 +5,6 @@ import hu.dreamteam.lux.entity.User;
 import hu.dreamteam.lux.service.PostService;
 import hu.dreamteam.lux.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,11 +68,6 @@ public class HomeController {
             ex.printStackTrace();
         }
         return "index";
-    }
-
-    @RequestMapping("/login")
-    public String login(){
-        return "auth/login";
     }
 
 }
