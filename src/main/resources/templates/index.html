@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>lux</title>
+    <style>
+        .box{
+            backgroung-color:#dee9fa;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 2px 2px;
+        }
+    </style>
 </head>
 <body>
 
@@ -10,14 +18,14 @@
         <h1>Lux</h1>
     </div>
     <form th:action="@{/post}" th:object="${post}" method="post">
-        <textarea th:field="*{content}" id="content" name="content"></textarea>
+        <textarea th:field="*{content}" id="content" name="content"></textarea><br>
         <input type="submit" value="post">
     </form>
     <div>
         <p th:text="${current_user_name}"></p>
     </div>
 
-    <div th:each="post : ${posts}">
+    <div th:each="post : ${posts}" class="box">
         <p th:text="${post.user.firstName}"></p>
         <p th:text="${post.content}"></p>
     </div>
