@@ -24,6 +24,7 @@ public class HomeController {
         this.userService = userService;
     }
 
+    //ez egy komment, majd kitörlöm :D
     @Autowired
     private void setEncoder(BCryptPasswordEncoder encoder){
         this.encoder = encoder;
