@@ -62,14 +62,14 @@ public class HomeController {
     @RequestMapping("/post")
     public String posting(Post post, HttpServletRequest request,  Model model){
         postService.savePost(post, userService.findByEmail(request.getUserPrincipal().getName()));
-        model.addAttribute("post", new Post());
+       /* model.addAttribute("post", new Post());
         model.addAttribute("current_user_name", request.getUserPrincipal().getName());
         try {
             model.addAttribute("posts", postService.getPosts());
         }catch (NullPointerException ex){
             ex.printStackTrace();
-        }
-        return "index";
+        }*/
+        return "redirect:/";
     }
 
 }
