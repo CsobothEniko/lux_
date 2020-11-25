@@ -8,6 +8,7 @@ class LuxApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
 
 }
