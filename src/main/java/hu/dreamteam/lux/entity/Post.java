@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Post {
+public class Post implements Comparable<Post>{
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -77,5 +77,10 @@ public class Post {
 
     public void setLikes(List<Like> likes) {
         this.likes = likes;
+    }
+
+    @Override
+    public int compareTo(Post post) {
+        return getDate().compareTo(post.getDate());
     }
 }

@@ -33,7 +33,7 @@ public class HomeController {
     private void setPostService(PostService postService){
         this.postService = postService;
     }
-
+// Itt vannak az endpoint-ok
     @RequestMapping("/")
     public String index(HttpServletRequest request, Model model){
         model.addAttribute("post", new Post());
@@ -60,15 +60,8 @@ public class HomeController {
     }
 
     @RequestMapping("/post")
-    public String posting(Post post, HttpServletRequest request,  Model model){
+    public String posting(Post post, HttpServletRequest request){
         postService.savePost(post, userService.findByEmail(request.getUserPrincipal().getName()));
-       /* model.addAttribute("post", new Post());
-        model.addAttribute("current_user_name", request.getUserPrincipal().getName());
-        try {
-            model.addAttribute("posts", postService.getPosts());
-        }catch (NullPointerException ex){
-            ex.printStackTrace();
-        }*/
         return "redirect:/";
     }
 

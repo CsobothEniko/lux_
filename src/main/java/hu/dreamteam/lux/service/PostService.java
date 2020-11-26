@@ -6,6 +6,7 @@ import hu.dreamteam.lux.repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,9 @@ public class PostService {
     }
 
     public List<Post> getPosts(){
-        return postRepo.findAll();
+        List<Post> posts = postRepo.findAll();
+        Collections.sort(posts, Collections.reverseOrder());
+        return posts;
     }
 
     public void savePost(Post post, User user){
