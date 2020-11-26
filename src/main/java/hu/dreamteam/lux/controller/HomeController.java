@@ -33,7 +33,7 @@ public class HomeController {
     private void setPostService(PostService postService){
         this.postService = postService;
     }
-// Itt vannak az endpoint-ok
+// Itt vannak az endpoint-ok és a service példányok
     @RequestMapping("/")
     public String index(HttpServletRequest request, Model model){
         model.addAttribute("post", new Post());
